@@ -1,0 +1,56 @@
+Pre-processing
+- Converting/transforming the dtypes (if necessary)
+- Handling Inconsistencies (missing values, duplicates, outliers) by removing/imputation
+- Feature addition (if necessary)
+- Feature transformation (if the data is biased)
+- Feature scaling
+- Feature selection
+- PCA
+- Train test split
+- Visualization after handling
+
+Modelling
+- Kmeans Class: init, _assign_labels, _update_centroids, fit, _inertia, _silhouette
+- Elbow method for inertia and _silhouette
+
+Evaluation Model:
+- Clusters distribution
+- Cluster characteristic
+- Different scenarios output (PCA and non-pca, scaled and non-scaled, etc..)
+
+
+📊 **Inteprete the result**
+- All data type was correct with float and 1 integer 
+- There are 12 Columns and 4898 row of data
+- quality as predicted colummn
+
+Since out target is quality, lets focus on using this column for our Visualization
+- Knowing the distribution of targets
+- Each quality characteristic in term of fixed_acidity, volatile_acidity and etc.
+- does fixed_acidity and volatile_acidity has correlation?
+- does free_sulfur_dioxide and total_sulfur_dioxide has correlation?
+- Some people have their own preferences in alcohol, like the sweetness level, the thicknes/densitiy level, or even the alcohol content
+- What are the factors that makes the sweetness/thickness/alcohol high/low, 
+
+- The highest quality tend to `have less` residual sugar, chlorides, free_sulfur_dioxide, total_sulfur_dioxide but `more` critic, fixed_acidity
+- The lowest quality tend to `have more` residual sugar, chlorides, free_sulfur_dioxide, total_sulfur_dioxide but `less` critic
+- Interestingly, in some columns, there's always fluctuations in quality `4`
+
+
+Conclusion Boxplot for each labels
+- It is quite hard to discriminate each of the labels because;
+- most of them are overlapped
+- Their ranges are similiar
+- Most of the lower quality has variation in range
+- But, higher quality has more consistent characteristic because of smaller range
+
+
+Conclusion Pairplot
+- It is hard to seperate each classes based on numerical columns pairings
+- But Alcohol row is kind of unique.
+- You can see lighter color is on the upper bound
+- While darker color is in the lower bound
+- Higher quality has more alcohol
+- Lower quality has lower alcohol
+
+

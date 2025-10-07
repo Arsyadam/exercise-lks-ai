@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_50352550bead410ae5ece7d2bf7f435f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_50352550bead410ae5ece7d2bf7f435f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_50352550bead410ae5ece7d2bf7f435f = L.map(
+                "map_50352550bead410ae5ece7d2bf7f435f",
+                {
+                    center: [-7.5, 110.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f0949be6cde1920d500c8a070629a3fc = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f0949be6cde1920d500c8a070629a3fc.addTo(map_50352550bead410ae5ece7d2bf7f435f);
+        
+    
+            var marker_a10ffb6ee67f972d7ec3258e8dedbdb9 = L.marker(
+                [-7.983908, 112.621391],
+                {
+}
+            ).addTo(map_50352550bead410ae5ece7d2bf7f435f);
+        
+    
+            var icon_b59c443dfef7fa1d2dbf2c0051de643e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a10ffb6ee67f972d7ec3258e8dedbdb9.setIcon(icon_b59c443dfef7fa1d2dbf2c0051de643e);
+        
+    
+        var popup_50e1813452e12763d6a3c1eebd7e5607 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e48c2c374f7e9067412598ec88938f07 = $(`<div id="html_e48c2c374f7e9067412598ec88938f07" style="width: 100.0%; height: 100.0%;">Kota Malang, Jawa Timur</div>`)[0];
+                popup_50e1813452e12763d6a3c1eebd7e5607.setContent(html_e48c2c374f7e9067412598ec88938f07);
+            
+        
+
+        marker_a10ffb6ee67f972d7ec3258e8dedbdb9.bindPopup(popup_50e1813452e12763d6a3c1eebd7e5607)
+        ;
+
+        
+    
+    
+            marker_a10ffb6ee67f972d7ec3258e8dedbdb9.bindTooltip(
+                `<div>
+                     Kota Malang
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2e725477cdb21be2e9220c6d33faff32 = L.marker(
+                [-7.250445, 112.768845],
+                {
+}
+            ).addTo(map_50352550bead410ae5ece7d2bf7f435f);
+        
+    
+            var icon_4269441475f57931b5b61d513144493f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2e725477cdb21be2e9220c6d33faff32.setIcon(icon_4269441475f57931b5b61d513144493f);
+        
+    
+        var popup_6b37daf1546c765505a555e59ad80b65 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_04e3193f9be8abe6ed8f68e1016433fe = $(`<div id="html_04e3193f9be8abe6ed8f68e1016433fe" style="width: 100.0%; height: 100.0%;">Kota Surabaya, Jawa Timur</div>`)[0];
+                popup_6b37daf1546c765505a555e59ad80b65.setContent(html_04e3193f9be8abe6ed8f68e1016433fe);
+            
+        
+
+        marker_2e725477cdb21be2e9220c6d33faff32.bindPopup(popup_6b37daf1546c765505a555e59ad80b65)
+        ;
+
+        
+    
+    
+            marker_2e725477cdb21be2e9220c6d33faff32.bindTooltip(
+                `<div>
+                     Kota Surabaya
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

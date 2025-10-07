@@ -1,0 +1,13 @@
+2. Pre-processing
+- Handling Missing Values (imputation/removal)
+- Handling duplicates (removal)
+- Handling outliers (imputaton/removal)
+- Feature Transformation (converting dtypes, normalization)
+- Feature scaling (if necessary)
+- Feature selection (corr, feature importance, etc)
+- Train test split
+
+3. Modelling
+- Linear Reg OLS
+- Linear Reg GD 
+- Model Evaluation
