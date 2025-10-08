@@ -16,7 +16,7 @@ location_df = pd.read_csv(os.path.join(BASE_DIR, "dataset", "dataset_lat-long_ja
 shipment_df = pd.read_csv(os.path.join(BASE_DIR, "dataset", "Dataset-barang-angkut_processed.csv"))
 
 
-with open('data.pkl', 'rb') as file:
+with open(os.path.join(BASE_DIR, 'data.pkl'), 'rb') as file:
 	data = pickle.load(file)
 INITIAL = list(data['INITIAL'])
 GOAL = list(data['GOAL'])
