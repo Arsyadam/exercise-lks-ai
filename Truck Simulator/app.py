@@ -1,4 +1,5 @@
-import streamlit as st 
+import os
+import streamlit as st
 import pandas as pd
 import pickle
 import numpy as np
@@ -7,9 +8,12 @@ import pydeck as pdk
 
 from utils import get_distance, get_side_job, check_combo, check_combo_addition, calc_muatan_after_addition, get_reward_df, highlight_path
 
-connections_df = pd.read_csv("dataset/edgelist.csv")
-location_df = pd.read_csv("dataset/dataset_lat-long_jatim_processed.csv")
-shipment_df = pd.read_csv("dataset/Dataset-barang-angkut_processed.csv")
+# Pastikan path dataset relatif terhadap lokasi app.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+connections_df = pd.read_csv(os.path.join(BASE_DIR, "dataset", "edgelist.csv"))
+location_df = pd.read_csv(os.path.join(BASE_DIR, "dataset", "dataset_lat-long_jatim_processed.csv"))
+shipment_df = pd.read_csv(os.path.join(BASE_DIR, "dataset", "Dataset-barang-angkut_processed.csv"))
 
 
 with open('data.pkl', 'rb') as file:
