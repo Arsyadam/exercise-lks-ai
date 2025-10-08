@@ -183,83 +183,86 @@ with tab2:
 
 
 with tab3:
-	if solar_start_input != 0:	
-		st.write(f'#### Go Back to {initial_input} from {ceperan_goal_input}')
-		initial_back = route_df['INITIAL_BACK'].iloc[0]
-		goal_back = route_df['GOAL_BACK'].iloc[0]
-		rewards_back = route_df['REWARDS_BACK'].iloc[0]
-		distance_back = route_df['DISTANCE_BACK'].iloc[0]
-		initial_row = selected_df[(selected_df['INITIAL'] == initial_back) & (selected_df['GOAL'] == goal_back)]
-		st.write(f'Initial back: {initial_back}')
-		st.write(f'Goal back: {goal_back}')
-		st.write(f'Rewards back: {rewards_back}')
-		st.write(f'Distance back: {distance_back} \n')
-		
-		total_distance_path = route_df['TOTAL_DISTANCE_PATH'].iloc[0]
-		total_solar = route_df['TOTAL_SOLAR'].iloc[0]
-		total_rewards = (reward_start + total_rewards_side_job + rewards_back)
-		path = route_df['PATH'].iloc[0]
-		st.write(f'Total rewards: {total_rewards}')
-		st.write(f'Total Distance: {total_distance_path}')
-		st.write(f'Total solar: {total_solar}')
-		st.write(f'Path: {path}')
+	if solar_start_input != 0:
+		if len(route_df) == 0:
+			st.error("== NO TRIP / NOT ENOUGH SOLAR ==")
+		else:
+			st.write(f'#### Go Back to {initial_input} from {ceperan_goal_input}')
+			initial_back = route_df['INITIAL_BACK'].iloc[0]
+			goal_back = route_df['GOAL_BACK'].iloc[0]
+			rewards_back = route_df['REWARDS_BACK'].iloc[0]
+			distance_back = route_df['DISTANCE_BACK'].iloc[0]
+			initial_row = selected_df[(selected_df['INITIAL'] == initial_back) & (selected_df['GOAL'] == goal_back)]
+			st.write(f'Initial back: {initial_back}')
+			st.write(f'Goal back: {goal_back}')
+			st.write(f'Rewards back: {rewards_back}')
+			st.write(f'Distance back: {distance_back} \n')
+			
+			total_distance_path = route_df['TOTAL_DISTANCE_PATH'].iloc[0]
+			total_solar = route_df['TOTAL_SOLAR'].iloc[0]
+			total_rewards = (reward_start + total_rewards_side_job + rewards_back)
+			path = route_df['PATH'].iloc[0]
+			st.write(f'Total rewards: {total_rewards}')
+			st.write(f'Total Distance: {total_distance_path}')
+			st.write(f'Total solar: {total_solar}')
+			st.write(f'Path: {path}')
 
-		# Ensure each node has a 'pos' attribute
-		for node in G.nodes:
-			if 'pos' not in G.nodes[node]:
-				G.nodes[node]['pos'] = (location_df.loc[location_df['Daerah'] == node, 'Longitude'].values[0],
-										location_df.loc[location_df['Daerah'] == node, 'Latitude'].values[0])
+			# Ensure each node has a 'pos' attribute
+			for node in G.nodes:
+				if 'pos' not in G.nodes[node]:
+					G.nodes[node]['pos'] = (location_df.loc[location_df['Daerah'] == node, 'Longitude'].values[0],
+											location_df.loc[location_df['Daerah'] == node, 'Latitude'].values[0])
 
-		edge_paths = [
-			{"path": [G.nodes[edge[0]]["pos"], G.nodes[edge[1]]["pos"]]}
-			for edge in G.edges
-		]
+			edge_paths = [
+				{"path": [G.nodes[edge[0]]["pos"], G.nodes[edge[1]]["pos"]]}
+				for edge in G.edges
+			]
 
-		edge_layer = pdk.Layer(
-		"PathLayer",
-		data=edge_paths,
-		get_path="path",
-		get_color=[173, 216, 230],  # Light blue color
-		width_scale=20,
-		width_min_pixels=2,
-		get_width=3,
-		)
-
-
-		# Define the ScatterplotLayer for nodes
-		node_layer = pdk.Layer(
-		"ScatterplotLayer",
-		data=[
-			{"position": G.nodes[node]["pos"], "Daerah": node, "color": [255, 0, 0]}  # Red for nodes
-			for node in G.nodes
-		],
-		get_position="position",
-		get_fill_color="color",
-		get_radius=2000,
-		pickable=True,
-		)
-		
-		path = route_df['PATH'].iloc[0]
-		edge_list = [{"path": [G.nodes[edge[0]]["pos"], G.nodes[edge[1]]["pos"]]} for edge in zip(path, path[1:])]
-		trip_layer = pdk.Layer(
+			edge_layer = pdk.Layer(
 			"PathLayer",
-			data=edge_list,
+			data=edge_paths,
 			get_path="path",
-			get_color=[0, 0, 230],  # Light blue color
+			get_color=[173, 216, 230],  # Light blue color
 			width_scale=20,
 			width_min_pixels=2,
 			get_width=3,
-		)
+			)
 
 
-		# Define the initial view state
-		view_state = pdk.ViewState(
-			latitude=location_df["Latitude"].mean(),
-			longitude=location_df["Longitude"].mean(),
-			zoom=7,
-		)
+			# Define the ScatterplotLayer for nodes
+			node_layer = pdk.Layer(
+			"ScatterplotLayer",
+			data=[
+				{"position": G.nodes[node]["pos"], "Daerah": node, "color": [255, 0, 0]}  # Red for nodes
+				for node in G.nodes
+			],
+			get_position="position",
+			get_fill_color="color",
+			get_radius=2000,
+			pickable=True,
+			)
+			
+			path = route_df['PATH'].iloc[0]
+			edge_list = [{"path": [G.nodes[edge[0]]["pos"], G.nodes[edge[1]]["pos"]]} for edge in zip(path, path[1:])]
+			trip_layer = pdk.Layer(
+				"PathLayer",
+				data=edge_list,
+				get_path="path",
+				get_color=[0, 0, 230],  # Light blue color
+				width_scale=20,
+				width_min_pixels=2,
+				get_width=3,
+			)
 
-		st.title("Graph on Map with Source-Target Connections")
 
-		# # Render the Pydeck chart in Streamlit
-		st.pydeck_chart(pdk.Deck(layers=[ edge_layer, node_layer, trip_layer], initial_view_state=view_state, tooltip={"text": "{Daerah}"}))
+			# Define the initial view state
+			view_state = pdk.ViewState(
+				latitude=location_df["Latitude"].mean(),
+				longitude=location_df["Longitude"].mean(),
+				zoom=7,
+			)
+
+			st.title("Graph on Map with Source-Target Connections")
+
+			# # Render the Pydeck chart in Streamlit
+			st.pydeck_chart(pdk.Deck(layers=[ edge_layer, node_layer, trip_layer], initial_view_state=view_state, tooltip={"text": "{Daerah}"}))
